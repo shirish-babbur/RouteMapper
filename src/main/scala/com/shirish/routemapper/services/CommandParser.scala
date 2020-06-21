@@ -110,8 +110,10 @@ class CommandParser {
         LeftTurn(words(1).toInt)
       } else if (words(0) == JUMP_COMMAND && words(1) == FD_COMMAND) {
         JumpForWard(words(2).toInt)
-      } else {
+      } else if (words(0) == JUMP_COMMAND && words(1) == BK_COMMAND){
         JumpBackWard(words(2).toInt)
+      } else {
+        throw new InvalidCommandException("Invalid command.")
       }
     } else {
       null

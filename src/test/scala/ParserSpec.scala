@@ -57,4 +57,11 @@ class ParserSpec extends UnitSpec {
       parser.parse(input)
     }
   }
+
+  it should "should throw exception for small case commands" in {
+    val input = "fd 100"
+    assertThrows[InvalidCommandException] {
+      parser.parse(input)
+    }
+  }
 }

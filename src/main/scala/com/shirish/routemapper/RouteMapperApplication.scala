@@ -15,21 +15,25 @@ object RouteMapperApplication extends App {
     var exit = false
     while(!exit) {
       printUsage()
-      val choice = scala.io.StdIn.readInt()
-      choice match {
-        case 1 =>
-          try {
-            println("Enter comma separated commands to map route:")
-            val input = scala.io.StdIn.readLine()
-            val route = executor.execute(parser.parse(input), Utils.getDefaultCursor)
-            println("Printing cursor positions at each step:")
-            printRoute(route)
-          } catch {
-            case x: Throwable =>
-              println(s" Exception occurred due to : ${x.getMessage}")
-          }
-        case 2 => exit = true
-        case _ => println("Invalid Choice")
+      try {
+        val choice = scala.io.StdIn.readInt()
+        choice match {
+          case 1 =>
+            try {
+              println("Enter comma separated commands to map route:")
+              val input = scala.io.StdIn.readLine()
+              val route = executor.execute(parser.parse(input), Utils.getDefaultCursor)
+              println("Printing cursor positions at each step:")
+              printRoute(route)
+            } catch {
+              case x: Throwable =>
+                println(s" Exception occurred due to : ${x.getMessage}")
+            }
+          case 2 => exit = true
+          case _ => println("Invalid Choice")
+        }
+      } catch {
+        case x: Throwable => println("Invalid Input. Enter Number only.")
       }
     }
   }
